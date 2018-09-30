@@ -1,0 +1,32 @@
+-Player
+	-id
+	-gamers tag (name)
+	-Dob
+	-age
+	-email
+	-date joinning
+	-wallet balance
+
+-playerGameInfo
+	-Player_ID
+	-Game_Name
+	-play time
+	-Level
+	-achievments
+
+-Games
+	-Game_ID
+	-Game_Name
+	-Genre
+	-Rating
+	-Release Date
+	-Version
+
+
+topic
+	-gaming center
+	-gaming dB
+		-game
+		-game publisher
+		-where to buy
+		-system specs where does it run?
