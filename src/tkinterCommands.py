@@ -9,9 +9,9 @@ def createLable(root, text, row, col, colspan=1):
 def printmessage():
     print('Button Pressed')
 
-def createButton(root, name, width, row, col, cmd):
+def createButton(root, name, width, row, col, cmd, sticky='E'):
     printbutton = Button(root, text = name, width=width, command=cmd)
-    printbutton.grid(row=row, column=col, sticky=E)
+    printbutton.grid(row=row, column=col, sticky=sticky)
 
 def createList(root, height, width, row, col, rowspan=6, columnspan=4):
     list = Listbox(root, height=height, width=width)

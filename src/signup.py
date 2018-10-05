@@ -15,6 +15,7 @@ def add_gamer_info(gamer_name,gamer_email):
     unique_ID += 1
     print(gamer_name,gamer_email)
     database.insert(unique_ID, gamer_name, gamer_email)
+    
 #main window 
 def window():
     """New Window for signing up the new user"""

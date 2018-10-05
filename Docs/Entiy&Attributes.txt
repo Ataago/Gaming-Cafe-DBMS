@@ -14,6 +14,14 @@
 	-Level
 	-achievments
 
+-inventory
+	-game_ID
+	-gamer_ID
+	-game_name
+	-play_time	
+	-achievments
+	-
+
 -Games
 	-Game_ID
 	-Game_Name
@@ -22,7 +30,11 @@
 	-Release Date
 	-Version
 
-
+-games
+	-game_id
+	-game_name
+	-genre
+	-
 topic
 	-gaming center
 	-gaming dB

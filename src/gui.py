@@ -53,7 +53,7 @@ root.protocol("WM_DELETE_WINDOW", on_closing)
 
 tkinterCommands.createLable(root, 'Nishant Gaming Cafe', row=1, col=1)  #insert image and make it bold
 
-tkinterCommands.createButton(root, 'Refresh', width=12, row=3,col=2, cmd=view_command)
+tkinterCommands.createButton(root, 'Refresh', width=11, row=3,col=3, cmd=view_command, sticky='W')
 tkinterCommands.createButton(root, 'Add Gamer', width=17, row=1, col=3, cmd = add_gamer_command)
 tkinterCommands.createButton(root, 'Remove Gamer',width=17, row=2, col=3, cmd = remove_gamer_command)
 tkinterCommands.createButton(root, 'View Gamer', width=17, row=3, col=3, cmd = view_gamer_command)
