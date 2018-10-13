@@ -30,7 +30,11 @@ def window(selected_tuple):
         inventory_list.delete(0, END)
         for row in database.view_inventory(gamer_ID):
             inventory_list.insert(END, row)
-            
+
+    def remove_game_command():
+        if messagebox.askokcancel('Delete Game', 'Are you sure you want to remove %s permenantly from %s?' % (selected_tuple_games[2],gamer_tag) ):
+            database.delete_game(selected_tuple_games[0])
+        view_command()
         
     user_info = Tk()
     user_info.title('Gamer Info: %s' %gamer_tag)
@@ -47,7 +51,7 @@ def window(selected_tuple):
     tkinterCommands.createLable(user_info, email, row=1, col=1)
 
     tkinterCommands.createButton(user_info, 'Add Game', width=12, row=0, col=4, cmd=open_games_list)
-    tkinterCommands.createButton(user_info, 'Remove Game', width=12, row=1, col=4, cmd=tkinterCommands.printmessage)
+    tkinterCommands.createButton(user_info, 'Remove Game', width=12, row=1, col=4, cmd=remove_game_command )
     tkinterCommands.createButton(user_info, 'Delete User', width=12, row=2, col=4, cmd=remove_gamer_command)
     tkinterCommands.createButton(user_info, 'Refresh', width=12, row=2, col=3, cmd=view_command)
 

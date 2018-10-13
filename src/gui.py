@@ -19,8 +19,18 @@ def get_selected_row(event):
 
 def view_command():
     gamer_list.delete(0, END)
-    for row in database.view('gamer'):
-        gamer_list.insert(END, row)
+    for tuple_row in database.view('gamer'):
+        global row 
+        row = list(tuple_row)
+        print('view command: ', row)
+        for item in row:
+            i = 0
+            if isinstance(item, str):
+                row[i] = item.replace(" ","_")
+            print(row[i])
+        print('modified row: ', row)
+            gamer_list.insert(END, row.replace(" ", "+"))
+
 
 def add_gamer_command():
     signup.window()
@@ -58,8 +68,9 @@ tkinterCommands.createButton(root, 'Add Gamer', width=17, row=1, col=3, cmd = ad
 tkinterCommands.createButton(root, 'Remove Gamer',width=17, row=2, col=3, cmd = remove_gamer_command)
 tkinterCommands.createButton(root, 'View Gamer', width=17, row=3, col=3, cmd = view_gamer_command)
 
-gamer_list = tkinterCommands.createList(root, height=40, width=100, row=5, col=0)
+gamer_list = tkinterCommands.createList(root, height=40, width=100, row=5, col=5)
 gamer_list.bind('<<ListboxSelect>>',get_selected_row)
+idk = tkinterCommands.createList(root, height=40, width=100, row=5, col=0)
 
 view_command()
 root.mainloop()

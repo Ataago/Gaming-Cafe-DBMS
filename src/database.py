@@ -24,6 +24,7 @@ def view(table_name):
     cur.execute("SELECT * FROM %s" % table_name)
     rows = cur.fetchall()
     conn.close()
+    print('printing rows: ',rows)
     return rows
 
 def view_inventory(gamer_ID):
@@ -64,10 +65,19 @@ def delete(id):
     connection.commit()
     connection.close()
 
+def delete_game(game_ID):
+    '''Deletes a game form inventory table'''
+    conn = sqlite3.connect(data_base_name)
+    cur = conn.cursor()
+    cur.execute("DELETE FROM inventory WHERE game_ID = ?", (game_ID, ))
+    print('Deleted "%d" game from "games"',id)
+    conn.commit()
+    conn.close()
+
 connect()
-#insert(8079, 'Ataa', 'ataago7@gmail.com')
-#insert(83079, 'Nishant', 'noob@gmail.com')
-#insert(12379, 'Amit', 'wastefellow@gmail.com')
+insert(8079, 'Ataa', 'ataago7@gmail.com')
+insert(83079, 'Nishant', 'noob@gmail.com')
+insert(12379, 'Amit', 'wastefellow@gmail.com')
 
 insert_games(123, 'GTA V', 'Openworld')
 insert_games(124, 'Read Dead Redemption', 'Openworld')
