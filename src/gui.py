@@ -1,6 +1,7 @@
 import tkinter
 from tkinter import *
 from tkinter import messagebox
+import os
 
 import tkinterCommands
 import userInfo
@@ -20,7 +21,8 @@ def get_selected_row(event):
 def view_command():
     gamer_list.delete(0, END)
     for row in database.view('gamer'):
-        gamer_list.insert(END, row)
+        id_name =(row[0], row[1])
+        gamer_list.insert(END, id_name)
 
 
 def add_gamer_command():
@@ -28,22 +30,33 @@ def add_gamer_command():
     view_command()
 
 def remove_gamer_command():
-    ID = selected_tuple[0]
-    if messagebox.askokcancel('Delete User', 'Are you sure you want to remove %s permenantly?' % selected_tuple[1]):
-        database.delete(ID)
-    view_command()
+    try:    
+        ID = selected_tuple[0]
+        if messagebox.askokcancel('Delete User', 'Are you sure you want to remove %s permenantly?' % selected_tuple[1]):
+            database.delete(ID)
+        view_command()
+    except:
+        print('select a tuple')
+        messagebox.showinfo("Warning", "Select a Gamer.")
 
 def view_gamer_command():
-    ID = selected_tuple[0]
-    print(ID)
-    userInfo.window(selected_tuple)
+    try:
+        ID = selected_tuple[0]
+        print(ID)
+        userInfo.window(selected_tuple)
+    except:
+        print('select a tuple')
+        messagebox.showinfo("Warning", "Select a Gamer.")
+
 
 
 #main home window GUI
 
 root = Tk()
 root.title("My Gaming Cafe Data")
-
+cwd = os.path.dirname(os.path.realpath(__file__))
+demoCafe = cwd + '\images\\front.png'
+print(cwd)
 
 def on_closing():
     if messagebox.askokcancel('Quit', 'Are you sure you want to quit?'):
@@ -51,15 +64,17 @@ def on_closing():
 
 root.protocol("WM_DELETE_WINDOW", on_closing)
 
+cafe = PhotoImage(file = demoCafe)
+label = Label( root, image = cafe)
+label.grid(row = 1, column = 0, columnspan = 3)
+#tkinterCommands.createLable(root, 'Nishant Gaming Cafe', row=1, col=1)  #insert image and make it bold
 
-tkinterCommands.createLable(root, 'Nishant Gaming Cafe', row=1, col=1)  #insert image and make it bold
+tkinterCommands.createButton(root, 'Refresh', width=17, row=50,col=2, cmd=view_command, sticky='e')
+tkinterCommands.createButton(root, 'Add Gamer', width=17, row=2, col=2, cmd = add_gamer_command)
+tkinterCommands.createButton(root, 'Remove Gamer',width=17, row=3, col=2, cmd = remove_gamer_command)
+tkinterCommands.createButton(root, 'View Gamer', width=17, row=4, col=2, cmd = view_gamer_command)
 
-tkinterCommands.createButton(root, 'Refresh', width=11, row=3,col=3, cmd=view_command, sticky='W')
-tkinterCommands.createButton(root, 'Add Gamer', width=17, row=1, col=3, cmd = add_gamer_command)
-tkinterCommands.createButton(root, 'Remove Gamer',width=17, row=2, col=3, cmd = remove_gamer_command)
-tkinterCommands.createButton(root, 'View Gamer', width=17, row=3, col=3, cmd = view_gamer_command)
-
-gamer_list = tkinterCommands.createList(root, height=40, width=100, row=5, col=0)
+gamer_list = tkinterCommands.createList(root, height=20, width=145, row=2, col=0, rowspan=100, columnspan=1)
 gamer_list.bind('<<ListboxSelect>>',get_selected_row)
 
 

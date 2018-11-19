@@ -8,10 +8,15 @@ import database
 
 #main Window
 def window(selected_tuple):
+    gamer_info = database.view_gamer(selected_tuple[0])
+    print('Selected Gamer: ',gamer_info)
 
-    gamer_ID = selected_tuple[0]
-    gamer_tag = selected_tuple[1]
-    email = selected_tuple[2]
+
+    gamer_ID = gamer_info[0][0]
+    gamer_tag = gamer_info[0][1]
+    email = gamer_info[0][2]
+    tag = gamer_info[0][3]
+    age = gamer_info[0][4]
 
     def open_games_list():
         gamesList.window(gamer_ID)
@@ -39,7 +44,7 @@ def window(selected_tuple):
     user_info = Tk()
     user_info.title('Gamer Info: %s' %gamer_tag)
     print(selected_tuple)       #debug line
-
+    
     def remove_gamer_command():
         if messagebox.askokcancel('Delete User', 'Are you sure you want to remove %s permenantly?' % gamer_tag):
             database.delete(gamer_ID)
@@ -49,6 +54,10 @@ def window(selected_tuple):
     tkinterCommands.createLable(user_info, gamer_tag, row=0, col=1)
     tkinterCommands.createLable(user_info, 'Email :', row=1, col=0)
     tkinterCommands.createLable(user_info, email, row=1, col=1)
+    tkinterCommands.createLable(user_info, 'Gamer Tag :', row=2, col=0)
+    tkinterCommands.createLable(user_info, tag, row=2, col=1)
+    tkinterCommands.createLable(user_info, 'Age :', row=3, col=0)
+    tkinterCommands.createLable(user_info, age, row=3, col=1)
 
     tkinterCommands.createButton(user_info, 'Add Game', width=12, row=0, col=4, cmd=open_games_list)
     tkinterCommands.createButton(user_info, 'Remove Game', width=12, row=1, col=4, cmd=remove_game_command )
