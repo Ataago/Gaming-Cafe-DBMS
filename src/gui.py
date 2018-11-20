@@ -9,14 +9,12 @@ import signup
 import database
 
 
-#database commands
+
 
 def get_selected_row(event):
     index = gamer_list.curselection()[0]
-    print(index)
     global selected_tuple
     selected_tuple = gamer_list.get(index)
-    print(selected_tuple)
 
 def view_command():
     gamer_list.delete(0, END)
@@ -54,9 +52,9 @@ def view_gamer_command():
 
 root = Tk()
 root.title("My Gaming Cafe Data")
+
 cwd = os.path.dirname(os.path.realpath(__file__))
-demoCafe = cwd + '\images\\front.png'
-print(cwd)
+#print(cwd)
 
 def on_closing():
     if messagebox.askokcancel('Quit', 'Are you sure you want to quit?'):
@@ -64,21 +62,25 @@ def on_closing():
 
 root.protocol("WM_DELETE_WINDOW", on_closing)
 
-cafe = PhotoImage(file = demoCafe)
-label = Label( root, image = cafe)
-label.grid(row = 1, column = 0, columnspan = 3)
+#ROG Cafe image----
+imagePath = cwd + '/images//front.png'
+image = PhotoImage(file = imagePath)
+imageLabel = Label( root, image = image)
+imageLabel.grid(row = 0, column = 0, columnspan = 3)
+
 #tkinterCommands.createLable(root, 'Nishant Gaming Cafe', row=1, col=1)  #insert image and make it bold
 
-tkinterCommands.createButton(root, 'Refresh', width=17, row=50,col=2, cmd=view_command, sticky='e')
+tkinterCommands.createButton(root, 'Refresh', width=17, row=101,col=2, cmd=view_command, sticky='e')
 tkinterCommands.createButton(root, 'Add Gamer', width=17, row=2, col=2, cmd = add_gamer_command)
 tkinterCommands.createButton(root, 'Remove Gamer',width=17, row=3, col=2, cmd = remove_gamer_command)
 tkinterCommands.createButton(root, 'View Gamer', width=17, row=4, col=2, cmd = view_gamer_command)
 
-gamer_list = tkinterCommands.createList(root, height=20, width=145, row=2, col=0, rowspan=100, columnspan=1)
+gamer_list = tkinterCommands.createList(root, height=20, width=98, row=2, col=0, rowspan=100, columnspan=1)
 gamer_list.bind('<<ListboxSelect>>',get_selected_row)
 
 
-view_command()
+view_command()  #display the Gamers on home screen
+
 root.mainloop()
 
 

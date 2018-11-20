@@ -5,17 +5,37 @@ import os
 import tkinterCommands
 import database
 
+cwd = os.path.dirname(os.path.realpath(__file__))
+unique_ID_path = cwd + '/unique_id.py'
 
-unique_ID = 71700
+
+    
+"""with open(unique_ID_path,"w") as unique_IDFile:
+    unique_IDFile.write('1234')
+    unique_IDFile.close()
+with open(unique_ID_path) as unique_IDFile:
+    print(unique_IDFile.read())"""
+
+
 
 #database commands
 
 def add_gamer_info(gamer_name,gamer_email,gamer_tag,age):
     """Inserting New Gamer data into gamer table"""
-    global unique_ID 
-    unique_ID += 1
+    unique_ID = 0
+    #geeting Unique id
+    with open(unique_ID_path) as unique_IDFile:
+        unique_ID = unique_IDFile.read()
+        print(unique_ID)
+    unique_ID = int(unique_ID) + 1
+
     print(gamer_name,gamer_email)
-    database.insert(unique_ID, gamer_name, gamer_email, gamer_tag, age)
+    database.insert(int(unique_ID), gamer_name, gamer_email, gamer_tag, age)
+
+    #storing incremented unique id
+    with open(unique_ID_path,"w") as unique_IDFile:
+        unique_IDFile.write(str(unique_ID))
+        unique_IDFile.close()
     
 #main window 
 def window():
@@ -25,7 +45,7 @@ def window():
     
     cwd = os.path.dirname(os.path.realpath(__file__))
     
-    demoCafe = cwd + '\images\welcome1.png'
+    demoCafe = cwd + '/images/welcome1.png'
     print(demoCafe)
     cafe = PhotoImage(file = demoCafe)
     label = Label(new_user, image = cafe)

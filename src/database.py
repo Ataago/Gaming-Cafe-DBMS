@@ -6,6 +6,17 @@ data_base_name = "MyGameCafe_V2.db"
 def connect():
     conn = sqlite3.connect(data_base_name)
     cur = conn.cursor()
+
+    cur.execute("drop table test")
+    cur.execute("create table if not exists test(id integer)")
+    cur.execute("insert into test values('asdfas')")
+    conn.commit()
+    cur.execute("select * from test")
+    rows = cur.fetchall()
+    print(rows)
+
+
+
     #cur.execute("DROP TABLE if exists gamer")
     cur.execute("CREATE TABLE IF NOT EXISTS gamer(id INTEGER PRIMARY KEY , gamer_name TEXT, email TEXT, gamer_tag TEXT, age INTEGER, UNIQUE (email))")
     
@@ -24,7 +35,6 @@ def view(table_name):
     cur.execute("SELECT * FROM %s" % table_name)
     rows = cur.fetchall()
     conn.close()
-    print('printing rows: ',rows)
     return rows
 
 def view_gamer(gamer_ID):
@@ -41,6 +51,15 @@ def view_inventory(gamer_ID):
     conn = sqlite3.connect(data_base_name)
     cur = conn.cursor()
     cur.execute("SELECT * FROM inventory WHERE gamer_ID = %s" % (gamer_ID))
+    rows = cur.fetchall()
+    conn.close()
+    return rows
+
+def view_games(game_ID):
+    """Returns the tuple based on the game_id"""
+    conn = sqlite3.connect(data_base_name)
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM games WHERE game_id = %s" % (game_ID))
     rows = cur.fetchall()
     conn.close()
     return rows
@@ -84,9 +103,10 @@ def delete_game(game_ID):
     conn.close()
 
 connect()
+"""
 insert(8079, 'Ataa', 'ataago7@gmail.com','Ataago',19)
 insert(83079, 'Nishant', 'noob@gmail.com','Nish',20)
-insert(12379, 'Amit', 'wastefellow@gmail.com', '@mit',21)
+insert(12379, 'Amit', 'wastefellow@gmail.com', '@mit',21)"""
  
 insert_games(123, 'GTA V', 'Openworld', '2013-09-17',5, 92)
 insert_games(108, 'Read Dead Redemption 2', 'Adventure','2018-10-16',2,100)
