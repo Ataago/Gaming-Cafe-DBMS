@@ -6,17 +6,20 @@ data_base_name = "MyGameCafe_V2.db"
 def connect():
     conn = sqlite3.connect(data_base_name)
     cur = conn.cursor()
-
+    '''
     cur.execute("drop table test")
     cur.execute("create table if not exists test(id integer)")
     cur.execute("insert into test values('asdfas')")
     conn.commit()
-    cur.execute("select * from test")
+    cur.execute("delete from owner where username = ''")
+    print('Deleted')
     rows = cur.fetchall()
     print(rows)
-
-
-
+    '''
+    #cur.execute("DROP TABLE IF EXISTS owner")
+    cur.execute("CREATE TABLE IF NOT EXISTS owner(username TEXT NOT NULL, password TEXt NOT NULL, UNIQUE(username));")
+    cur.execute("select * from owner")
+    print(cur.fetchall())
     #cur.execute("DROP TABLE if exists gamer")
     cur.execute("CREATE TABLE IF NOT EXISTS gamer(id INTEGER PRIMARY KEY , gamer_name TEXT, email TEXT, gamer_tag TEXT, age INTEGER, UNIQUE (email))")
     
@@ -33,6 +36,15 @@ def view(table_name):
     conn = sqlite3.connect(data_base_name)
     cur = conn.cursor()
     cur.execute("SELECT * FROM %s" % table_name)
+    rows = cur.fetchall()
+    conn.close()
+    return rows
+
+def view_owner(username):
+    """returns the tuple with username and password"""
+    conn = sqlite3.connect(data_base_name)
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM owner WHERE username = '%s' " % (username))
     rows = cur.fetchall()
     conn.close()
     return rows
@@ -63,6 +75,14 @@ def view_games(game_ID):
     rows = cur.fetchall()
     conn.close()
     return rows
+    
+def insert_owner(username, password):
+    conn = sqlite3.connect(data_base_name)
+    cur = conn.cursor()
+    cur.execute("INSERT or REPLACE INTO owner VALUES (?,?)", (username, password))
+    print('inserted')
+    conn.commit()
+    conn.close()
 
 def insert(id, gamer_name, email, gamer_tag, age):
     conn = sqlite3.connect(data_base_name)
@@ -102,8 +122,17 @@ def delete_game(game_ID):
     conn.commit()
     conn.close()
 
+def update_owner(username, password):
+    conn = sqlite3.connect(data_base_name)
+    cur = conn.cursor()
+    cur.execute("UPDATE owner SET password = '%s' WHERE username = '%s'" % (password,username))
+    conn.commit()
+    conn.close()
+
 connect()
 """
+insert_owner('ataa','pass')
+update_owner('ataa','123')
 insert(8079, 'Ataa', 'ataago7@gmail.com','Ataago',19)
 insert(83079, 'Nishant', 'noob@gmail.com','Nish',20)
 insert(12379, 'Amit', 'wastefellow@gmail.com', '@mit',21)"""
