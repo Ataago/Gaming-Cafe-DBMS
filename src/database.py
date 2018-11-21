@@ -18,8 +18,7 @@ def connect():
     '''
     #cur.execute("DROP TABLE IF EXISTS owner")
     cur.execute("CREATE TABLE IF NOT EXISTS owner(username TEXT NOT NULL, password TEXt NOT NULL, UNIQUE(username));")
-    cur.execute("select * from owner")
-    print(cur.fetchall())
+
     #cur.execute("DROP TABLE if exists gamer")
     cur.execute("CREATE TABLE IF NOT EXISTS gamer(id INTEGER PRIMARY KEY , gamer_name TEXT, email TEXT, gamer_tag TEXT, age INTEGER, UNIQUE (email))")
     
@@ -129,6 +128,7 @@ def update_owner(username, password):
     conn.commit()
     conn.close()
 
+#database commands
 connect()
 """
 insert_owner('ataa','pass')
@@ -136,15 +136,21 @@ update_owner('ataa','123')
 insert(8079, 'Ataa', 'ataago7@gmail.com','Ataago',19)
 insert(83079, 'Nishant', 'noob@gmail.com','Nish',20)
 insert(12379, 'Amit', 'wastefellow@gmail.com', '@mit',21)"""
- 
-insert_games(123, 'GTA V', 'Openworld', '2013-09-17',5, 92)
-insert_games(108, 'Read Dead Redemption 2', 'Adventure','2018-10-16',2,100)
-'''insert_games(112, 'Euro Truck Simulator', 'Simulation')
-insert_games(432, 'CSGO', 'First person Shooter')
-insert_games(654, 'Battlefield', 'First person Shooter')
-insert_games(765, 'City Skylines', 'Simulation')
-insert_games(234, 'PUBG', 'First person Shooter')'''
 
-#insert_inventory(123,324,'gta',32,'gold')
-#insert_inventory(234,324,'gta',32,'gold')
-print(view('gamer'))
+
+insert_games(123, 'GTA V', 'Openworld  ', '17th Sep, 2013',5, 92)
+insert_games(101, 'Battlefield 4', 'Shooter     ','29th Oct, 2013', 4, 77)
+insert_games(102, 'Battlefield V', 'Shooter     ','20th Nov, 2018', 5, 'NA')
+insert_games(103, 'Grand Theft Auto IV', 'Adventure     ','29th Apr, 2008', 4, 83)
+insert_games(104, 'Grand Theft Auto: San Andreas', 'Adventure     ','26th Oct, 2004', 3, 91)
+insert_games(105, 'Farming Simulator 19', 'Simulator       ','20th Nov, 2018', 1, 'NA')
+insert_games(106, 'Farming Simulator 17', 'Simulator       ','25th Oct, 2016', 5, 90)
+insert_games(107, 'Red Dead Redemption', 'Adventure       ','18th May, 2010', 2, 91)
+insert_games(108, 'Read Dead Redemption 2', 'Adventure   ','26th Oct, 2018',2,99)
+insert_games(109, "PLAYERUNKNOWN'S BATTLEGROUNDS", 'Shooter       ','20th Dec, 2017', 8, 85)
+insert_games(110, 'Assassins Creed III', 'Strategy       ','30th Oct, 2012', 5, 73)
+insert_games(111, 'Assassins Creed', 'Strategy       ','13th Nov, 2007', 6, 74)
+insert_games(112, 'The Witcher 3: Wild Hunt', 'Adventure       ','19th May, 2015', 4, 97)
+insert_games(113, 'The Witcher 2: Assassins of Kings', 'Adventure       ','17th May, 2011', 4, 87)
+#insert_games(____, '___________', '___________       ','_________', ____, _______)
+
